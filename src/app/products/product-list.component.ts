@@ -1,13 +1,15 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { IProduct } from './product';
 
 @Component({
     'selector': 'pm-products',
-    'templateUrl':'./product-list.component.html'
+    'templateUrl':'./product-list.component.html',
+    'styleUrls':['./product-list.component.css']
 })
-export class ProductListComponent
+export class ProductListComponent implements OnInit
 {
     pageTitle = "Product List";
-    products: any[]=[
+    products: IProduct[]=[
         {
             "productId": 1,
             "productName": "Leaf Rake",
@@ -42,9 +44,41 @@ export class ProductListComponent
     imageWidth = 50;
     imageMargin = 2;
     showImage = false;
-    
+    private _listFilter: string='';
+
+    get listFilter(): string{
+      return this._listFilter;
+    }
+
+    set listFilter(value: string) {
+      this._listFilter = value;
+      this.filteredProducts = this.performFilter(value);
+      console.log(this.filteredProducts);
+    }
     toggleImage(): void 
     {
         this.showImage = !this.showImage;
+    }
+
+    filteredProducts:IProduct[] = [];
+    
+    performFilter(value: string): IProduct[]
+    {
+      return this.products.filter(
+        (product: IProduct)=> 
+        {
+          // console.log(product.productName.toLowerCase().includes(value));
+          return product.productName.toLowerCase().includes(value.toLowerCase());
+        });
+      }
+    ngOnInit(): void
+    {
+      console.log("on init method");
+      this.listFilter = '';
+    }
+    
+    onRatingClicked(message: string)
+    {
+      this.pageTitle = "Product List "+ message;
     }
 }
