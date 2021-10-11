@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "EqKDlfQcIYNnIPpTNizd85UBWzR/GPkXG4BS3VjCKdRCZtXZmpi8//xUl9ob4IRQXH2EtzV64nsagUsCz42zSA==",
+  "success": true,
+  "projectFilePath": "E:\\myimpo\\Projects\\Angular_Js\\Angular-GettingStarted\\Products Managemet Using Angular and DotNet\\backend\\backend.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\M K V Kishore\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\M K V Kishore\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\M K V Kishore\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\M K V Kishore\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\M K V Kishore\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\M K V Kishore\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}
