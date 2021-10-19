@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Cors;
 using WebApplication3.Models;
 
 namespace WebApplication3
@@ -27,13 +29,23 @@ namespace WebApplication3
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            _ = services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+              {
+                  builder.AllowAnyOrigin()
+                         .AllowAnyMethod()
+                         .AllowAnyHeader();
+              }));
             services.AddDbContextPool<ProductDBContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("ProductManagementDb"));
+            });
+            services.AddDbContextPool<AccountDBContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("ProductManagementDb"));
             });
             services.AddControllers();
             services.AddSwaggerGen(c =>
-            {
+            {   
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication3", Version = "v1" });
             });
         }
@@ -41,6 +53,7 @@ namespace WebApplication3
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -49,9 +62,11 @@ namespace WebApplication3
             }
 
             app.UseRouting();
+            app.UseCors("MyPolicy");
 
             app.UseAuthorization();
-
+            
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
