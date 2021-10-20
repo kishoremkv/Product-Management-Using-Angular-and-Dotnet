@@ -9,17 +9,35 @@ import { IProduct } from "./product";
 })
 export class ProductService
 {
-    private productUrl = 'http://localhost:9942/api/Products';
+    private configUrl = 'https://localhost:44303';
+    private productUrl = "";
     constructor(private http: HttpClient)
     {
 
     }
     getProducts(): Observable<IProduct[]>
     {
+        this.productUrl = this.configUrl+ '/api/Products';
         return this.http.get<IProduct[]>(this.productUrl).pipe(
             tap(data=>console.log('All: ',JSON.stringify(data))),
             catchError(this.handleError)
         );
+    }
+    getProduct(id: number): Observable<IProduct> {
+        this.productUrl = this.configUrl+ '/api/Products/'+id;
+        console.log(this.productUrl);
+        return this.http.get<IProduct>(this.productUrl).pipe(
+            tap(data => console.log(`fetched product details: =${JSON.stringify(data)}`)),
+            catchError(this.handleError)
+        )
+    }
+
+    deleteProduct(id: number): Observable<IProduct> {
+        this.productUrl = this.configUrl+ '/api/Products/'+id;
+        return this.http.delete<IProduct>(this.productUrl).pipe(
+            tap(_ => console.log(`deleted hero id=${id}`)),
+            catchError(this.handleError)
+          );
     }
     private handleError(err: HttpErrorResponse)
     {
