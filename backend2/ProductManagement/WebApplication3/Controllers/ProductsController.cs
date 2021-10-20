@@ -26,7 +26,7 @@ namespace WebApplication3.Controllers
         public ActionResult<IEnumerable<Product>> GetProducts()
         {
             Console.WriteLine("Kishore");
-            Console.WriteLine(_context.Products.ToList());
+           // Console.WriteLine(_context.Products.ToList());
             return  _context.Products.ToList();
         }
 
