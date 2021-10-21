@@ -50,6 +50,7 @@ export class ProductDetailComponent implements OnInit {
     this.sub = this.productService.deleteProduct(this.id).subscribe({
       next: product=> {
           this.product = product;
+          alert('Product deleted successfully!');
           this.router.navigate(['/products']);
         },
         error: err => 
