@@ -32,6 +32,29 @@ export class ProductService
         )
     }
 
+    addProduct(newproduct: any): Observable<IProduct> 
+    {
+        newproduct.imageUrl = 'assets/images/xbox-controller.png';
+        console.log(newproduct);
+        this.productUrl = this.configUrl+ '/api/Products/';
+        return this.http.post<IProduct>(this.productUrl, newproduct).pipe(
+            tap((newproduct: IProduct)=> console.log(`added new product with id=${newproduct.productId}`),
+            catchError(this.handleError))
+        );
+    }
+
+    updateProduct(id:number, updateproduct: any): Observable<IProduct> 
+    {
+        updateproduct.productId = id;
+        updateproduct.imageUrl = 'assets/images/xbox-controller.png';
+        console.log(updateproduct);
+        console.log(id);
+        this.productUrl = this.configUrl+ '/api/Products/'+id;
+        return this.http.put<IProduct>(this.productUrl, updateproduct).pipe(
+            tap((updateproduct: IProduct)=> console.log(`updated product id=${updateproduct.productId}`),
+            catchError(this.handleError))
+        );
+    }
     deleteProduct(id: number): Observable<IProduct> {
         this.productUrl = this.configUrl+ '/api/Products/'+id;
         return this.http.delete<IProduct>(this.productUrl).pipe(
